@@ -1,7 +1,7 @@
 forensics:-
 
 
-1. Cypher Anxiety
+1. Cypher Anxiety 
 
 --> An image was leaked from a babies store. the manager is so annoyed because he needs to identify the image to fire charges against the responsible employee. the key is the md5 of the image
 
@@ -11,7 +11,7 @@ forensics:-
 cybertalent_forencis# strings 'find the image.pcap' | head -11
 
 Hey bro
-S\U
+S\U	
 Sup supp, are we ready
 yeah, u got the files?
 yes but i think the channel is not secured
@@ -26,11 +26,207 @@ listen on 7070 and ill send you the file , bye
 	b) with wireshark lets filter "tcp.port == 7070"
 	    > now download raw of image.pcap
 
-	c) Then open a netcat client on localhost:
+	c) Then open a netcat client on localhost: 
 		> netcat localhost 7070 < crypted.file
 
-	d) And open a cryptcat listener on localhost:
+	d) And open a cryptcat listener on localhost: 
 		> cryptcat -l -k P@ssawordaya -p 7070 > decrypted.file
 
 	e) here you get decrypted image but there is nothing called as flag,
 	   > the md5sum of image is a flag.
+
+> 3beef06be834f3151309037dde4714ec
+
+
+
+2. Can You Find Me?
+
+--> A Cyber criminal is hiding important data. We find this log file.It is highly compressed. Find the attacker's secret.
+
+	a) extract a zip file
+	>  unzip f100.zip 
+
+	b) extract a arc file
+	>  nomarch f100.arc
+
+	c) extract a ppmd file
+	>  ppmd d secret
+
+	d) extract  Microsoft Cabinet archive data
+	>  cabextract -F "secret" secret.cab
+
+	e) extract bzip2 file
+	>  bzip2 -d secret.bz2
+
+//	f) extract a arc file
+//	>  nomarch secret.arc
+
+	g) extract a XD file
+	>  xz -d secret.xz
+
+	h) extract 7zip archive file.
+	>  p7zip -d secret.7z
+
+	i) extract gzip file
+	> gunzip -d secret.gz
+
+	j) extract tar file
+	> tar -xvf secret.tar
+
+
+	its too lengethy proceess lets use python to do so..
+
+----------------------------------------------------------------------
+#!/usr/bin/python 
+
+import os
+import subprocess 
+
+def check(a):
+	r=''
+	for i in range(0,len(a)):
+		if a[i]==',' or a[i]=='-' :
+			break 	
+		else:
+			r+=a[i]
+	return r
+
+c = os.popen("file secret").read()
+s = check(c)
+
+
+if s == "secret: KGB Archiver file with compression level 3\n" :
+	os.system('mv secret secret.kgb ; kgb secret.kgb ; rm secret.kgb')
+
+if s == "secret: ARJ archive data":
+	os.system('mv secret secret.arj ; arj e secret.arj ; rm secret.arj')
+	
+if s == "secret: PPMD archive data\n":
+	os.system('mv secret secret.ppmd ; ppmd d secret.ppmd ; rm secret.ppmd')
+	
+
+if s == "secret: rzip compressed data ":
+	os.system('mv secret secret.rz ; rzip -d secret.rz')	
+	
+
+if s == "secret: gzip compressed data":ls
+	os.system('mv secret secret.gz ; gzip -d secret.gz')
+	
+
+if s == "secret: POSIX tar archive (GNU)\n":
+	os.system('mv secret secret.tar ; tar -xvf secret.tar ; rm secret.tar')
+	
+if s == "secret: Zip archive data":
+	os.system('mv secret secret.zip ; unzip secret.zip ; rm secret.zip ')
+	
+if s == "secret: Microsoft Cabinet archive data":
+	os.system('mv secret secret.cab ; cabextract -F "secret" secret.cab ; rm secret.cab')	
+	
+
+if s == "secret: bzip2 compressed data":
+	os.system('mv secret secret.bz2 ; bzip2 -d secret.bz2 ')
+	
+
+if s == "secret: ARC archive data":
+	os.system('mv secret secret.arc ; nomarch secret.arc ; rm secret.arc ')
+	
+if s == "secret: XZ compressed data\n":
+	os.system(' mv secret secret.xz ; xz -d secret.xz  ')
+	
+if s == "secret: 7":
+	os.system('mv secret secret.7z ; p7zip -d secret.7z')
+		
+if s == "secret: Zoo archive data":
+	os.system('mv secret secret.zoo ; zoo -extract secret.zoo ; rm secret.zoo')
+
+if s == "secret: RAR archive data":
+	os.system('mv secret secret.rar ; unrar e secret.rar ; rm secret.rar')
+
+
+----------------------------------------------------------------------
+
+
+
+
+3. G&P List
+
+--> Just Open the File and Capture the flag . Submission in MD5
+
+	download the file which is of docx extension now simply unzip it anad here you will get the flag.
+	> flag.txt
+
+> 877c1fa0445adaedc5365d9c139c5219
+
+
+
+4. Hidden Message
+
+--> A cyber Criminal is hiding information in the below file . capture the flag ? submit Flag in MD5 Format
+
+	fire following command and here you get the flag.
+	> strings  hidden_message.jpg | head -11
+
+	or for any md5 use following command 
+	> strings hidden_message.jpg | grep "[0-9a-f]\{32\}"
+
+> b1a1f2855d2428930e0c9c4ce10500d5
+
+5. ADSL Modem
+
+--> After tracking a cyber criminal, We were able to extract this firmware from a DSL modem . Try to find the flag !!!
+
+	now here check for the file type of a .bin file. you will get its a simple .rar file
+	> extract it using unrar tool in linux
+
+	$ unrar e Adsl-modem.bin
+
+	Extracting from Adsl-modem.bin
+
+	Flag{reversing_FW_is_interesting_but_this_is_for_fun}
+
+	Extracting  TL-MR3220 V2 _FW.bin and here you get the flag.
+
+> Flag{reversing_FW_is_interesting_but_this_is_for_fun}
+
+
+6. Lost Files
+
+-> I lost all my files :( . capture the flag !!!
+
+	for this we will simply use strings command and there you get the flag
+
+	> strings lost_files.mem.001 | grep -i flag | head
+
+
+> Flag(You_Get_It_2)
+
+
+
+7. Partition Lost 
+
+--> Our Company's CEO had a car accident. His HDD was damaged and he lost all his files and partitions. Can you help him to recover his important data
+
+	here you can use a tool named > autopsy
+	1. img location > new case > partition > symlink > [next]
+	2. calculate > [add] 
+	3. click on file analysis > []
+	4. here you can see a file named fl@4.rar
+	5. clcik on it for contents of it and here you get the flag.
+
+	another method 
+
+	strings partition-lost.img  | grep flag -i | tail 
+
+> FLAG(701_L@b$_DR_DFIR)
+
+
+8. Search in Trash
+
+--> My HDD was destroyed in an accident. However, I was able to recover my recycle bin file . Can you know the flag ?
+
+	here again strings won the match
+
+	> strings search-trash | grep -i flag
+
+> FLag{Fat_32_DF_2}
+
