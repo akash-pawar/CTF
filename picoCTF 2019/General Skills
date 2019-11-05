@@ -1,0 +1,194 @@
+PICO CTF
+------------------------------------------
+GENERAL SKILLS
+-------------------/
+
+1. The Factory's Secret
+-> here it is all about playing game> play harder you will get flag
+> picoCTF{zerozerozerozero}
+
+
+2. Lets Warm Up
+
+If I told you a word started with 0x70 in hexadecimal, what would it start with in ASCII?
+-> to make hex to ASCII you can use python
+>>> chr(0x70)
+'p'
+(so here you get 'p' as ASCII)
+
+>  picoCTF{p}
+
+3. 2Warm
+
+Can you convert the number 42 (base 10) to binary (base 2)?
+-> To convert numeber 42 base_10 to bin(i.e base_2) use python
+>>> bin(42)[2:]
+'101010'
+
+>  picoCTF{101010}
+
+4. Warmed Up
+
+What is 0x3D (base 16) in decimal (base 10).
+--> simply use python type the hex 0x3D
+>>> 0x3D
+
+> picoCTF{61}
+
+
+5. bases
+
+What does this bDNhcm5fdGgzX3IwcDM1 mean? I think it has something to do with bases.
+--> echo "bDNhcm5fdGgzX3IwcDM1" | base64 -d
+
+> picoCTF{l3arn_th3_r0p35}
+
+
+
+
+6. Can you find the flag in file? This would be really tedious to look through manually,
+something tells me there is a better way.
+--> cat file| grep picoCTF
+
+> picoCTF{grep_is_good_to_find_things_cdb327ab}
+
+
+7. Resources
+
+https://picoctf.com/resources visit and you will get flag
+
+> picoCTF{r3source_pag3_f1ag}
+
+
+8. Based
+
+connect with netcat : nc 2019shell1.picoctf.com 44303
+here you need to perform
+->  1. Bin_to_ASCII = 01101101 01100001 01110000
+->	2. ASCII_to_text = 143 157 154 157 162 141 144 15
+->	3. Hex_to_ASCII = 6d6170
+
+i used this site for this https://www.rapidtables.com/convert/number/binary-to-ascii.html and atlast got the flag
+
+> picoCTF{learning_about_converting_values_b515dfd2}
+
+
+9. strings it
+
+download the file called strings. and fire the following command
+-> strings strings | grep picoCTF
+and here you get the flag.
+
+> picoCTF{5tRIng5_1T_0690b2a5}
+
+10. what's a net cat?
+
+here all you need to do is to connect using netcat
+-> nc 2019shell1.picoctf.com 12265
+You're on your way to becoming the net cat master - and here you get the flag
+
+> picoCTF{nEtCat_Mast3ry_74df27a3}
+
+
+11. First Grep: Part II
+
+here all you need to do is to execute all files using find command and grep for picoCTF, first go to shell
+-> find /problems/first-grep--part-ii_5_956980126dc47c50540b0f8f35a8e443/files -type f -exec grep 'picoCTF' {} \;
+and here you get the flag
+
+> picoCTF{grep_r_to_find_this_0898e9c9}
+
+
+12.  plumbing
+
+in this challenge all you need to do is to connect with netcat and grep the flag
+--> nc 2019shell1.picoctf.com 9525 | grep picoCTF
+
+> picoCTF{digital_plumb3r_dd86d037}
+
+
+13. whats-the-difference
+
+all you need see what is whats-the-difference, first download both the files
+--> if we use  $ diff cattos.jpg kitters.jpg
+(we get Binary files cattos.jpg and kitters.jpg differ) now we need to use
+-> $cmp -l cattos.jpg kitters.jpg
+(we get second coloum is ASCII of decode it)
+--> cmp -l cattos.jpg kitters.jpg | gawk '{printf "%c", strtonum(0$1)}'
+( to make it proper use > cmp -l cattos.jpg kitters.jpg | gawk '{printf "%c", strtonum(0$1)}' && echo )
+
+> picoCTF{th3yr3_a5_d1ff3r3nt_4s_bu773r_4nd_j311y_aslkjfdsalkfslkflkjdsfdszmz10548}
+
+
+14. where-is-the-file
+
+here you need to use there provided shell
+-> $cd /problems/where-is-the-file_1_54878e9f5b7db0ddbaf642cdb5c9b3b5
+now $ls -la (you can see a hidden file named '.cant_see_me')
+but you cannot use 'cat' command so use 'less' command
+-> $less .cant_see_me
+
+> picoCTF{w3ll_that_d1dnt_w0RK_3e782057}
+
+
+15. flag_shop
+
+Today after some writeups I learned something new which shows me
+-> The maximum value of a signed 32-bit is 2147483647.
+so we know there is 4 bytes intger used in code to store the user input as quantity
+simply enter the value so that it makes negative.
+
+Currently for sale
+1. Defintely not the flag Flag
+2. 1337 Flag
+1
+These knockoff Flags cost 900 each, enter desired quantity
+-> 123456789
+
+The final cost is: -558039596
+
+so here you get  your amount changed now you can buy 1337 flag.
+
+
+> picoCTF{m0n3y_bag5_e062f0fd}
+
+
+
+16. mus1c
+
+here this a program written in Rockstar programming language to encode ASCII text.
+-> we use https://codewithrockstar.com/ to decode the program i.e the lyrics.text
+we get ASCII as Output make it text to get flag.
+
+use python
+
+>>> '''114
+... 114
+... 114
+... 111
+... 99
+... 107
+... 110
+... 114
+... 110
+... 48
+... 49
+... 49
+... 51
+... 114
+... '''.strip().split('\n')
+['114', '114', '114', '111', '99', '107', '110', '114', '110', '48', '49', '49', '51', '114']
+>>> ''.join(map(chr,map(int,_)))
+'rrrocknrn0113r'
+
+or use any online sites https://www.browserling.com/tools/ascii-to-text
+
+> picoCTF{rrrocknrn0113r}
+
+
+17. 1_wanna_b3_a_r0ck5tar
+
+--> ''.join(map(chr,[66,79,78,74,79,86,73]))
+BONJOVI
+
+> picoCTF{BONJOVI}

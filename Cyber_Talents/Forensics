@@ -1,0 +1,36 @@
+forensics:-
+
+
+1. Cypher Anxiety
+
+--> An image was leaked from a babies store. the manager is so annoyed because he needs to identify the image to fire charges against the responsible employee. the key is the md5 of the image
+
+	a) first use strings command and see both head and tail.
+		> strings 'find the image.pcap' | head -11
+
+cybertalent_forencis# strings 'find the image.pcap' | head -11
+
+Hey bro
+S\U
+Sup supp, are we ready
+yeah, u got the files?
+yes but i think the channel is not secured
+the UTM will block the file transfer as the DLP module is active
+ok we can use cryptcat
+ok what the password then
+let it be P@ssawordaya
+hhh, ok
+listen on 7070 and ill send you the file , bye
+
+
+	b) with wireshark lets filter "tcp.port == 7070"
+	    > now download raw of image.pcap
+
+	c) Then open a netcat client on localhost:
+		> netcat localhost 7070 < crypted.file
+
+	d) And open a cryptcat listener on localhost:
+		> cryptcat -l -k P@ssawordaya -p 7070 > decrypted.file
+
+	e) here you get decrypted image but there is nothing called as flag,
+	   > the md5sum of image is a flag.

@@ -1,0 +1,126 @@
+1. Glory of the Garden :
+
+Ø Here you need to download a image named "garden.jpeg" and fire following command
+$ cat garden.jpg | strings
+And here you get the flag
+
+> picoCTF{more_than_m33ts_the_3y3f089EdF0}
+
+2. Unzip  :
+
+Ø Here you need to download zip named "file.zip" and fire following command to unzip
+$ unzip file.zip
+And here you get the a PNG file and in this PNG image open it there is flag
+
+> picoCTF{unz1pp1ng_1s_3a5y}
+
+3. So Meta :
+
+Ø Here you need to download a picture named "pico_img.jpg" and fire following command to read meta data
+Here I am going to use exiftool > you can download it from here https://www.sno.phy.queensu.ca/~phil/exiftool/
+$ exiftool pico_img.jpg
+And here you get the flag in Artist attribute
+
+>  picoCTF{s0_m3ta_9a16fd1d}
+
+4. What Lies Within :
+
+Ø Here you need to download a image named "buliding.png" and now goal is to decode so I am going to  use website to decode which I took from another writeup. https://stylesuxx.github.io/steganography/
+And here you get the flag
+
+> picoCTF{h1d1ng_1n_th3_b1t5}
+
+5. Extensions :
+
+Ø Here you need to download a file named "file.txt" first understand what type of file it is so fire file command
+$ file file.txt
+And here we get to know its PNG file now make it file.png and you get flag
+
+> picoCTF{now_you_know_about_extensions}
+
+
+6. Shark on wire 1 :
+
+Ø Here you need to download a file named "capture.pcap" here you need to use wireshark to follow and check all streams so fire wireshark command
+$ wireshark capture.pcap> now click on any UDP packet right click > Follow > UDP stream
+And here you need to check each packet and at 6 packet I get the flag
+
+> picoCTF{StaT31355_636f6e6e}
+
+7. White Pages :
+
+Ø Here you need to download a file named "whitepages.txt" open this file in sublime text edit and select all you will get dots.   We use simple python script to replace it with 0 and 1 and make it binary to ASSCI
+#!/usr/bin/env python
+f = open('./whitepages.txt', 'r').read()
+  s = hex(int(f.decode('utf-8').replace(u'\u2003', '0').replace(' ', '1'), 2))[3:-1].decode('hex')
+  print s
+
+$ python whitepages.py
+And here get flag
+
+> picoCTF{not_all_spaces_are_created_equal_f006c045f6b402ce4bc749dc7a262380}
+
+
+8. C0rrupt :
+
+Ø Here you need to download a file named "mystery" here the file is corrupted all you need to do is to recover
+$ file mystery	(but its data)lets check hexdump of file using hd we get to know looking at header its PNG header so make it .png
+$ hd mystery
+
+And here you see the file head is similar to PNG magic bits
+So its PNG image lets fix it, open file using > hexeditor
+
+1. we see that the first 8 bytes are 89 65 4e 34 0d 0a b0 aa this is very close to a png's file signature, 89 50 4E 47 0D 0A 1A 0A
+2. But still it wont work so now Looking at the chunks we see that after the header there must exist a IHDR chunk. Changing the 43 22 44 52 bytes to 49 48 44 52 fixes it. The file is still broken
+3. Looking through the hex dump we don't see any mistakes up until the pHYs chunk.
+4. Her we will use a tool named pngcheck we have the value 495224f0 instead 38d82c82, let's try to change it, and run pngcheck again..
+5. There is a strange chunk with a massive length right after the pHYs chunk. After some inspection it should be clear that it is an IDAT chunk. Changing the bytes from ab 44 45 54 to 49 44 41 54 results in a fixed png.
+6.    The difference is FFB1. We must subtract 4 bytes for the length field of the second IDAT, subtract 4 bytes for the CRC of .      the first IDAT, and subtract 4 bytes again for the chunktype of the first IDAT. Subtracting 12 in total, we get FFA5. Replace the length field with 00 00 FF A5.
+Since this does not specify a chunk, we must begin at the start and check each chunk, with the knowledge of the format of chunks and each field’s length: 4bytes(length)-4bytes(chunk type)-lengthbytes(data)-4bytes(crc). IHDR is length 13. sRGB is length 1. gAMA is length 4. pHYs is length 9. 
+Reference:- https://tcode2k16.github.io/blog/posts/picoctf-2019-writeup/forensics/
+
+> picoCTF{c0rrupt10n_1847995}
+
+
+
+9. Like1000 :
+
+Ø Here you need to download a file named "1000.tar" open this  tar file until you get last 1.tar here we will use a script.
+  import os 
+  for i in range(1000, 0, -1):
+      os.system("tar -xf" + str(i) + ".tar")
+  os.system("rm *.tar")
+
+$ python tar.py
+And here you get flag
+
+> picoCTF{l0t5_0f_TAR5}
+
+
+
+10. _m00nwalk :
+
+Ø Here you need to download a file named "message.wav" .
+We're getting a .wav file with some weird sounds but how we get the flag from this?
+after looking "How did pictures from the moon landing get sent back to Earth?" like the hint suggest we can find https://en.wikipedia.org/wiki/Slow-scan_television
+so, we have audio file and we know its SSTV ...all we need is a decoder i used http://users.belgacom.net/hamradio/rxsstv.htm
+after decoding the .wav file we get an image with the flag
+-------------------------------------------
+
+You can see this to as reference
+https://github.com/Dvd848/CTFs/blob/c34f7048ea4850dc071523d99a7410ba3db1b2bc/2019_picoCTF/m00nwalk.md
+
+Install first apt-get install qsstv
+root@kali:/media/sf_CTFs/pico/m00nwalk# apt-get install qsstv
+root@kali:~# pactl load-module module-null-sink sink_name=virtual-cable
+22
+root@kali:~# pavucontrol # A GUI will pop-up, go to the "Output Devices" tab to verify that you have the "Null Output" device
+root@kali:~# qsstv # The program GUI will pop-up, go to "Options" -> "Configuration" -> "Sound" and select the "PulseAudio" Audio Interface
+root@kali:~# # Back in the pavucontrol GUI, select the "Recording" tab and specify that QSSTV should capture audio from the Null Output
+
+root@kali:/media/sf_CTFs/pico/m00nwalk# paplay -d virtual-cable message.wav
+
+
+> picoCTF{beep_boop_im_in_space}
+
+12. Investigative Reversing 0
