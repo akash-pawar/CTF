@@ -6,6 +6,8 @@ And here you get the flag
 
 > picoCTF{more_than_m33ts_the_3y3f089EdF0}
 
+----------------------------------------------------------------------------------------------
+
 2. Unzip  :
 
 Ø Here you need to download zip named "file.zip" and fire following command to unzip
@@ -13,6 +15,8 @@ $ unzip file.zip
 And here you get the a PNG file and in this PNG image open it there is flag
 
 > picoCTF{unz1pp1ng_1s_3a5y}
+
+----------------------------------------------------------------------------------------------
 
 3. So Meta :
 
@@ -23,12 +27,16 @@ And here you get the flag in Artist attribute
 
 >  picoCTF{s0_m3ta_9a16fd1d}
 
+----------------------------------------------------------------------------------------------
+
 4. What Lies Within :
 
 Ø Here you need to download a image named "buliding.png" and now goal is to decode so I am going to  use website to decode which I took from another writeup. https://stylesuxx.github.io/steganography/
 And here you get the flag
 
 > picoCTF{h1d1ng_1n_th3_b1t5}
+
+----------------------------------------------------------------------------------------------
 
 5. Extensions :
 
@@ -38,6 +46,8 @@ And here we get to know its PNG file now make it file.png and you get flag
 
 > picoCTF{now_you_know_about_extensions}
 
+----------------------------------------------------------------------------------------------
+
 
 6. Shark on wire 1 :
 
@@ -46,6 +56,8 @@ $ wireshark capture.pcap> now click on any UDP packet right click > Follow > UD
 And here you need to check each packet and at 6 packet I get the flag
 
 > picoCTF{StaT31355_636f6e6e}
+
+----------------------------------------------------------------------------------------------
 
 7. White Pages :
 
@@ -59,6 +71,8 @@ $ python whitepages.py
 And here get flag
 
 > picoCTF{not_all_spaces_are_created_equal_f006c045f6b402ce4bc749dc7a262380}
+
+----------------------------------------------------------------------------------------------
 
 
 8. C0rrupt :
@@ -83,6 +97,8 @@ Reference:- https://tcode2k16.github.io/blog/posts/picoctf-2019-writeup/forensic
 
 
 
+----------------------------------------------------------------------------------------------
+
 9. Like1000 :
 
 Ø Here you need to download a file named "1000.tar" open this  tar file until you get last 1.tar here we will use a script.
@@ -96,6 +112,8 @@ And here you get flag
 
 > picoCTF{l0t5_0f_TAR5}
 
+
+----------------------------------------------------------------------------------------------
 
 
 10. _m00nwalk :
@@ -122,5 +140,8 @@ root@kali:/media/sf_CTFs/pico/m00nwalk# paplay -d virtual-cable message.wav
 
 
 > picoCTF{beep_boop_im_in_space}
+
+
+----------------------------------------------------------------------------------------------
 
 12. Investigative Reversing 0
