@@ -6,8 +6,6 @@ And here you get the flag
 
 > picoCTF{more_than_m33ts_the_3y3f089EdF0}
 
-----------------------------------------------------------------------------------------------
-
 2. Unzip  :
 
 Ø Here you need to download zip named "file.zip" and fire following command to unzip
@@ -15,8 +13,6 @@ $ unzip file.zip
 And here you get the a PNG file and in this PNG image open it there is flag
 
 > picoCTF{unz1pp1ng_1s_3a5y}
-
-----------------------------------------------------------------------------------------------
 
 3. So Meta :
 
@@ -27,16 +23,12 @@ And here you get the flag in Artist attribute
 
 >  picoCTF{s0_m3ta_9a16fd1d}
 
-----------------------------------------------------------------------------------------------
-
 4. What Lies Within :
 
 Ø Here you need to download a image named "buliding.png" and now goal is to decode so I am going to  use website to decode which I took from another writeup. https://stylesuxx.github.io/steganography/
 And here you get the flag
 
 > picoCTF{h1d1ng_1n_th3_b1t5}
-
-----------------------------------------------------------------------------------------------
 
 5. Extensions :
 
@@ -46,8 +38,6 @@ And here we get to know its PNG file now make it file.png and you get flag
 
 > picoCTF{now_you_know_about_extensions}
 
-----------------------------------------------------------------------------------------------
-
 
 6. Shark on wire 1 :
 
@@ -56,8 +46,6 @@ $ wireshark capture.pcap> now click on any UDP packet right click > Follow > UD
 And here you need to check each packet and at 6 packet I get the flag
 
 > picoCTF{StaT31355_636f6e6e}
-
-----------------------------------------------------------------------------------------------
 
 7. White Pages :
 
@@ -71,8 +59,6 @@ $ python whitepages.py
 And here get flag
 
 > picoCTF{not_all_spaces_are_created_equal_f006c045f6b402ce4bc749dc7a262380}
-
-----------------------------------------------------------------------------------------------
 
 
 8. C0rrupt :
@@ -97,8 +83,6 @@ Reference:- https://tcode2k16.github.io/blog/posts/picoctf-2019-writeup/forensic
 
 
 
-----------------------------------------------------------------------------------------------
-
 9. Like1000 :
 
 Ø Here you need to download a file named "1000.tar" open this  tar file until you get last 1.tar here we will use a script.
@@ -112,8 +96,6 @@ And here you get flag
 
 > picoCTF{l0t5_0f_TAR5}
 
-
-----------------------------------------------------------------------------------------------
 
 
 10. _m00nwalk :
@@ -130,7 +112,7 @@ https://github.com/Dvd848/CTFs/blob/c34f7048ea4850dc071523d99a7410ba3db1b2bc/201
 
 Install first apt-get install qsstv
 root@kali:/media/sf_CTFs/pico/m00nwalk# apt-get install qsstv
-root@kali:~# pactl load-module module-null-sink sink_name=virtual-cable
+root@kali:~# pa
 22
 root@kali:~# pavucontrol # A GUI will pop-up, go to the "Output Devices" tab to verify that you have the "Null Output" device
 root@kali:~# qsstv # The program GUI will pop-up, go to "Options" -> "Configuration" -> "Sound" and select the "PulseAudio" Audio Interface
@@ -141,7 +123,69 @@ root@kali:/media/sf_CTFs/pico/m00nwalk# paplay -d virtual-cable message.wav
 
 > picoCTF{beep_boop_im_in_space}
 
+11. _m00nwalk :
 
-----------------------------------------------------------------------------------------------
+  a. pactl laod-module module-null-sink sink_name=virtual-cable
+  b. pavucontrol (set Recording = null output)
+  c. qsstv (sound - output pluse_audio server)  > set mode "auto" to detect (martin1)
+  d. paplay -d virtual-cable clue1.wav
 
-12. Investigative Reversing 0
+    > here you get a password saying
+      hidden_stegosaurus
+  e. now use a tool named steghide>
+
+    $ steghide --extract  -sf message.wav -p  hidden_stegosaurus -xf output.text
+    $ cat output.txt
+
+  f. and here you get the flag.
+
+> picoCTF{the_answer_lies_hidden_in_plain_sight}
+
+
+12. Shark on Wire 2:
+
+    a. here we don't see any specific to follow which so lets look properly and analyize both
+      tcp and udp stream.
+
+    b. looking at UDP stream we get to know all the packets mostly have 5000 as sender port.
+      when it comes to destination port we can see that there is on 22 port there is so diff ports used >
+
+    c. udp.port == 22
+    > now see form start each values are added after 5000 + 5112 (where 112 means in ASSCI - "p")
+    > lets decode all using online decoder http://www.unit-conversion.info/texttools/ascii/
+
+    INPUT DATA : 112 105 099 111 067 084 070 123 112 049 076 076 102 051 114 051 100 095 100 097 116 097 095 118 049 097 095 115 116 051 103 048 125
+
+    OUTPUT TEXT : picoCTF{p1LLf3r3d_data_v1a_st3g0}
+
+
+
+13. WebNet0
+
+  > here we get "capture.pcap" and key file.
+
+  a. Open capture.pcap with wireshark > go to "Edit" > "Prefrences" > "Protocols"
+    > "TLS" > "RSA keys list" > TLS debug file > attach picopico.key
+  b. follow TLS stream > click on any TLS packet > "Follow" > TLS stream.
+    (here we get > switch different stream and get the flag in Header on HTTP req)
+
+    or you can follow another method >
+    i) fire this command > $ ssldump -r capture.pcap -k picopico.key -d
+
+
+14. WebNet1
+
+  > Open Wire shark with "capture.pcap"
+
+  a. Now go to edit > Prefrences > RSA keys > add you key here.
+  b. Now refresh packets (9->)
+  c. Now Follow HTTP Stream you will get the flag.
+
+
+
+
+
+15. Investigative Reversing 0
+
+
+>  picoCTF{f0und_1t_4e8e63a7}
