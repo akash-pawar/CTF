@@ -1,0 +1,531 @@
+REVERSE ENGINEERING:--
+
+
+----------------------------------------------------------------------
+
+1. vault-door-training
+
+--> here you will get a VaultDoorTraining.java file.
+
+	> simply open file and look for source code. 
+	
+	$ nano VaultDoorTraining.java
+
+	picoCTF{w4rm1ng_Up_w1tH_jAv4_c0b141c5e30} and here you get the flag
+
+> picoCTF{w4rm1ng_Up_w1tH_jAv4_c0b141c5e30}
+
+----------------------------------------------------------------------
+
+2. vault-door-1
+
+--> This vault uses some complicated arrays! I hope you can make sense of it, special agent. 
+	The source code for this vault is here: VaultDoor1.java
+
+	$ grep password.charAt VaultDoor1.java | cut -f2- -d"("| sort -n | cut -f2 -d\'| paste -s -d ""
+
+	and here you get the flag d35cr4mbl3_tH3_cH4r4cT3r5_63ef3a   
+
+> picoCTF{d35cr4mbl3_tH3_cH4r4cT3r5_63ef3a}
+
+----------------------------------------------------------------------
+
+3. vault-door-3 
+
+--> This vault uses for-loops and byte arrays. The source code for this vault is here: VaultDoor3.java
+
+	> when it comes to java code always try to use JS so that you dont much required to change syntax.
+
+		> password = "jU5t_a_sna_3lpm11ga4e_u_4_m9rf48"
+		'jU5t_a_sna_3lpm11ga4e_u_4_m9rf48'
+		>
+		> var i;
+		undefined
+		> var buffer = Array(32);
+		undefined
+		>
+		> for (i=0; i<8; i++) {
+		...     buffer[i] = password.charAt(i);
+		... }
+		's'
+		> for (; i<16; i++) {
+		...     buffer[i] = password.charAt(23-i);
+		... }
+		'n'
+		> for (; i<32; i+=2) {
+		...     buffer[i] = password.charAt(46-i);
+		... }
+		'1'
+		> for (i=31; i>=17; i-=2) {
+		...     buffer[i] = password.charAt(i);
+		... }
+		'g'
+		> console.log("picoCTF{" + buffer.join("") + "}");
+
+		picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_e9af18}
+
+
+		and here you get the flag.
+
+> picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_e9af18}
+
+----------------------------------------------------------------------
+
+4. vault-door-4
+--> This vault uses ASCII encoding for the password. The source code for this vault is here: VaultDoor4.java
+
+	here again we will use JS fire in console.
+
+		console.log(String.fromCharCode
+		(106 , 85  , 53  , 116 , 95  , 52  , 95  , 98  ,
+		0x55, 0x6e, 0x43, 0x68, 0x5f, 0x30, 0x66, 0x5f,
+		0142, 0131, 0164, 063 , 0163, 0137, 067 , 0141)+
+		['1' , 'c' , '8' , 'c' , '6' , '6' , '8' , 'b'].join(""))
+
+		and here you get the flag.
+
+> jU5t_4_bUnCh_0f_bYt3s_7a1c8c668b
+
+
+----------------------------------------------------------------------
+
+5. vault-door-5
+--> In the last challenge, you mastered octal (base 8), decimal (base 10), and hexadecimal (base 16) numbers, 
+	but this vault door uses a different change of base as well as URL encoding! 
+	The source code for this vault is here: VaultDoor5.java
+
+	here you get base64string simply decode it https://www.base64decode.org/
+	then you get URLencoding string decode it using online URL decoder https://www.urldecoder.org/
+	here you get the flag.
+
+> picoCTF{c0nv3rt1ng_fr0m_ba5e_64_da882d01}
+
+
+----------------------------------------------------------------------
+
+6. vault-door-6
+--> This vault uses an XOR encryption scheme. The source code for this vault is here: VaultDoor6.java
+
+	Let's reverse the logic using Python3:
+
+	>>> a = [0x3b, 0x65, 0x21, 0xa , 0x38, 0x0 , 0x36, 0x1d,
+            0xa , 0x3d, 0x61, 0x27, 0x11, 0x66, 0x27, 0xa ,
+            0x21, 0x1d, 0x61, 0x3b, 0xa , 0x2d, 0x65, 0x27,
+            0xa , 0x67, 0x6d, 0x33, 0x34, 0x6c, 0x60, 0x33]
+	>>> for i in a:
+		     print(chr(i ^ 0x55), end='')
+
+
+> picoCTF{n0t_mUcH_h4rD3r_tH4n_x0r_28fa95f}
+
+----------------------------------------------------------------------
+
+7. vault-door-7
+--> This vault uses bit shifts to convert a password string into an array of integers. 
+	Hurry, agent, we are running out of time to stop Dr. Evil's nefarious plans! 
+	The source code for this vault is here: VaultDoor7.java
+
+
+	1. Convert each decimal number into binary.
+	> 
+		1096770097	= 1000001010111110110001000110001
+		1952395366	= 1110100010111110011000001100110
+		1600270708	= 1011111011000100011000101110100
+		1601398833  = 1011111011100110110100000110001
+		1716808014	= 1100110010101000110100101001110
+		1734305381  = 1100111010111110110011001100101
+		828716089	= 110001011001010011010000111001
+		895562083	= 110101011000010011000101100011
+
+	2. Split the long binary number into four binary numbers of length eight.
+	   add extra 0 in starting.... of binary to make it in standard format
+
+
+	
+
+	3. Convert each binary number to its ASCII character.
+	> 
+		01000001 01011111 01100010 00110001 =  A_b1
+		01110100 01011111 00110000 01100110 =  t_0f
+		01011111 01100010 00110001 01110100	=  _b1t
+		01011111 01110011 01101000 00110001 =  _sh1
+		01100110 01010100 01101001 01001110 =  fTiN
+		01100111 01011111 01100110 01100101 =  g_fe
+		00110001 01100101 00110100 00111001 =  1e49
+		00110101 01100001 00110001 01100011 =  5a1c
+
+	4. You have your flag.  > A_b1t_0f_b1t_sh1fTiNg_fe1e495a1c
+
+
+> picoCTF{A_b1t_0f_b1t_sh1fTiNg_fe1e495a1c}
+		
+
+	solution 2:- but it won't worked for me.
+
+	We'll reverse the logic with Python: (pip install pwn)
+
+	
+	>>> from pwn import *
+	>>> a = [1096770097,1952395366,1600270708,1601398833,1716808014,1734305381,828716089,895562083]
+	>>> print "".join(p32(x, endian='big') for x in a)
+
+
+----------------------------------------------------------------------
+
+7. vault-door-8
+-->  The source code for this vault is here: VaultDoor8.java	
+
+	It is best to write a script to do this, doing this by hand would take too long.
+
+	1. Convert Code into readable format. Compare original code to formatted code.
+
+	2. Put in the given hex codes into the script to process.
+	
+	3. Create a bit switch function in your script, for python simply remove the type definitions from the switchBits function in the java.
+	
+	4. Call the switch bits with the bits given. Make sure to call it in reverse order of calls given in the java.
+
+----------------------------------------------------------------------
+
+8. asm1
+-->  What does asm1(0x345) return? Submit the flag as a hexadecimal value (starting with '0x'). 
+	NOTE: Your submission for this question will NOT be in the normal flag format. 
+
+				> we can see from the statement there is value given asm1(0x345)  so here EBP = 0x345
+
+	asm1:
+	<+0>:	push   ebp   							[0x345] = EBP
+	<+1>:	mov    ebp,esp							[0x345] = EBP to ESP
+	<+3>:	cmp    DWORD PTR [ebp+0x8],0x37a		// Compare EBP = 0x345 to 0x37a 
+	<+10>:	jg     0x512 <asm1+37>					// JMP not taken 0x345 is small.
+	<+12>:	cmp    DWORD PTR [ebp+0x8],0x345		// Compare EBP = 0x345 to 0x345   
+	<+19>:	jne    0x50a <asm1+29>					// JMP not taken both are equal 
+	<+21>:	mov    eax,DWORD PTR [ebp+0x8]			// EAX = EBP(return value) i.e 0x345
+	<+24>:	add    eax,0x3     						// EAX+0x3 = 0x348
+	<+27>:	jmp    0x529 <asm1+60>					// JUMP > at location <asm1+60> 
+	<+29>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+32>:	sub    eax,0x3
+	<+35>:	jmp    0x529 <asm1+60>
+	<+37>:	cmp    DWORD PTR [ebp+0x8],0x5ff
+	<+44>:	jne    0x523 <asm1+54>
+	<+46>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+49>:	sub    eax,0x3
+	<+52>:	jmp    0x529 <asm1+60>
+	<+54>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+57>:	add    eax,0x3
+	<+60>:	pop    ebp                              // It will come here that is nothing, but EBP(return value), we know now EBP=0x348
+	<+61>:	ret    
+
+
+	therfore the flag is 0x348
+
+> picoCTF{0x348}
+
+----------------------------------------------------------------------
+
+9. asm2
+
+-->	What does asm2(0xd,0x1e) return? Submit the flag as a hexadecimal value (starting with '0x'). 
+ 	NOTE: Your submission for this question will NOT be in the normal flag format.
+
+
+ 		<+0>:	push   ebp 							// EBP = 0x1e
+		<+1>:	mov    ebp,esp      				// ESP = 0x1e
+
+		<+3>:	sub    esp,0x10     				// ESP = 000e
+		
+		<+6>:	mov    eax,DWORD PTR [ebp+0xc]		// eax = 0x1e     12 bytes 
+		<+9>:	mov    DWORD PTR [ebp-0x4],eax      // [0x4]
+		
+		<+12>:	mov    eax,DWORD PTR [ebp+0x8]   	// eax = 0xd      08 bytes 
+		<+15>:	mov    DWORD PTR [ebp-0x8],eax      // [0x8]
+		
+		<+18>:	jmp    0x50c <asm2+31>				// jump taken to location <asm2+31>
+		
+		<+20>:	add    DWORD PTR [ebp-0x4],0x1      //  ADD [0x4] 12 bytes = 0x1e + 0x1   
+		<+24>:	add    DWORD PTR [ebp-0x8],0xfa     //  ADD [0x8] 08 bytes = 0xd + 0xfa    
+		
+		<+31>:	cmp    DWORD PTR [ebp-0x8],0x67a8   // compare [ebp-0x8] = 0xd < 0x67a8  // 2nd cmp 
+		<+38>:	jle    0x501 <asm2+20>				// Jump taken to location <asm2+20>
+		<+40>:	mov    eax,DWORD PTR [ebp-0x4]
+		<+43>:	leave  
+		<+44>:	ret   
+
+
+	** actually there is loop so run this small python script > and here you will get the flag..
+
+		def assem2():
+		    var1 = 0xd
+		    var2 = 0x1e
+
+		    while (var1<0x67a8):
+		        var2+=0x1
+		        var1+=0xfa
+
+		    print("picoCTF{"+hex(var2)+"}")
+
+		if __name__ == '__main__':
+			assem2()
+
+> picoCTF{0x89}
+
+----------------------------------------------------------------------
+
+10. asm3
+--> What does asm3(0xc4bd37e3,0xf516e15e,0xeea4f333) return? 
+	Submit the flag as a hexadecimal value (starting with '0x').
+ 	NOTE: Your submission for this question will NOT be in the normal flag format. 
+
+
+	 	now simply use an online emulator https://carlosrafaelgn.com.br/asm86/ and paste following code or
+	 	you can run it manually
+
+ 	_________________________________________  make some changes in code
+		.intel_syntax noprefix
+		.global asm3
+
+		asm3:
+			push   ebp
+			mov    ebp,esp
+			xor    eax,eax
+			mov    ah,BYTE PTR [ebp+0x9]
+			shl    ax,0x10
+			sub    al,BYTE PTR [ebp+0xd]
+			add    ah,BYTE PTR [ebp+0xe]
+			xor    ax,WORD PTR [ebp+0x10]
+			nop
+			pop    ebp
+			ret    
+
+
+	Contents of main.c:
+
+			#include <stdio.h>
+
+			int asm3(int, int, int);
+
+			int main(int argc, char* argv[])
+			{
+			    printf("0x%x\n", asm3(0xfe8cf7a4,0xf55018af,0xb8c70926));
+			    return 0;
+			}
+	_________________________________________
+
+	 	# gcc -masm=intel -m32 -c test.S -o test.o
+		# gcc -m32 -c main.c -o main.o
+		# gcc -m32 test.o main.o -o main
+		# ./main
+
+
+> picoCTF{0xe52c}
+
+----------------------------------------------------------------------
+
+11. asm4
+--> What will asm4("picoCTF_c1373") return? Submit the flag as a hexadecimal value (starting with '0x'). 
+	NOTE: Your submission for this question will NOT be in the normal flag format.
+
+----------------------------------------------------------------------
+
+
+12. reverse_cipher
+--> We have recovered a binary and a text file. Can you reverse the flag
+
+
+
+import os
+import mmap
+
+def memory_map(filename, access=mmap.ACCESS_READ):
+    size = os.path.getsize(filename)
+    fd = os.open(filename, os.O_RDONLY)
+    return mmap.mmap(fd, size, access=access)
+
+with memory_map("rev_this") as bin_file:
+    for i in range(8):
+        print(chr(bin_file[i]), end = '')
+    for i in range(8, 23):
+        if (i & 1) == 0:
+            print(chr(bin_file[i] - 5), end = '')
+        else:
+            print(chr(bin_file[i] + 2), end = '')
+    print (chr(bin_file[23]))
+
+
+    # python3 solve.py
+
+> picoCTF{r3v3rs32ccdd282}
+
+----------------------------------------------------------------------
+
+
+13. droids0
+--> Where do droid logs go. Check out this file. 
+
+	Now here we can see that it ask us to check for logs..
+	here all we can do is to install apk in device and look for logs using ADB.
+
+	> 1. Open genymotion > drag and drop > zero.apk in genymotion
+	  2. Setup adb and connect device:
+	  		$ adb connect 192.168.1.5:5555
+	  3. Now open the app > here we can see there it ask for key.. but before that lets see live logs.
+	  4.    $ adb logcat 
+	  5. Now looking at logcat > just enter the value in the app.
+	  6. here in logcat we get the Flag.
+
+> picoCTF{a.moose.once.bit.my.sister}
+
+----------------------------------------------------------------------
+
+
+14. droids1
+--> Find the pass, get the flag. Check out this file. 
+
+	Here all we need to do is > we can extract the file using unzip
+	then use jadx (dex decomplier ) > to decode the classess.dex
+
+	> here I use jadx-gui > then opened "one.apk"
+
+	> [jadx-gui] one.apk > Resources > resources.arsc > res > values > strings.xml 
+
+	> search for password and here i got the password >> opossum  
+
+	> given the app running on genymotion as a input and got the flag.
+
+
+
+> picoCTF{pining.for.the.fjords}
+
+
+----------------------------------------------------------------------
+
+
+15. droids2
+--> Find the pass, get the flag. Check out this file. 
+
+	> 1. again use jadx-gui to decomplie the apk and look for source code.
+	  2. then > check for source code > looking at all .java file, 
+	  we found something intresting in FlagstaffHill.java
+	  3. all we need to copy the source code and complie this source code in java.
+	  4. copy code below
+
+
+		  class FlagstaffHill {
+
+		public static void main(String [] args) {
+	        String[] witches = {"weatherwax", "ogg", "garlick", "nitt", "aching", "dismass"};
+	        int second = 3 - 3;
+	        int third = (3 / 3) + second;
+	        int fourth = (third + third) - second;
+	        int fifth = 3 + fourth;
+	        int sixth = (fifth + second) - third;
+	        String str = ".";
+	       System.out.println("".concat(witches[fifth]).concat(str).concat(witches[third]).concat(str).concat(witches[second]).concat(str).concat(witches[sixth]).concat(str).concat(witches[3]).concat(str).concat(witches[fourth]));
+
+	    }
+	}
+
+	and here we need to run the compile and run in java file.
+
+		$ javac FlagstaffHill.java
+		$ java FlagstaffHill
+
+		> dismass.ogg.weatherwax.aching.nitt.garlick
+
+		> here we get text which we need to give as a input to applicaiton running on the app,
+		so once applicaiton accepted the string we give input it will give us the flag..
+
+
+> picoCTF{what.is.your.favourite.colour}
+
+
+----------------------------------------------------------------------
+
+
+16. droids3
+--> Find the pass, get the flag. Check out this file. 
+
+	here we need to do some changes in smali file, so it basically require to making apk again
+
+		> 1. open the apk in jdx-gui > you will get to know that the flag can be  requested if 
+		  we look for FlagstaffHill.java > we can see a method is there yep() class should be called.
+			
+		  2. first decomplie the apk using apktool, before that make a copy. 
+		  		$ cp -r three  three_patched
+		  and check for the /three/smali/com/hellocmu/picoctf/FlagstaffHill.smali
+
+		  3. Lets $ cat FlagstaffHill.smali
+
+		    invoke-static {p0}, Lcom/hellocmu/picoctf/FlagstaffHill;->nope(Ljava/lang/String;)Ljava/lang/String;
+
+		  we can see the method invoked in the MainActivity.java is "nope".
+
+		  4. so simply make replace the 'nope' with 'yep'  < using VI you can do this...
+
+		  5. lets make it again back apk 
+
+		  	> apktool b three/ -o three_patched.apk
+
+		  	now when you will try to install it will not work because we know, it need re-sign again.
+
+			# creates key to sign
+
+			$ keytool -genkeypair -v -keystore key.keystore -alias publishingdoc -keyalg RSA -keysize 2048 -validity 10000
+
+			> enter password
+
+			$ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ./key.keystore three_patched.apk publishingdoc
+			
+			> enter password > your key will get signed...
+
+
+	6. Now lets install it in genymotion.
+
+	7. adb install three_patched.apk BUTTON"  and here you get the flag.
+
+
+> picoCTF{tis.but.a.scratch}
+
+----------------------------------------------------------------------
+
+
+17. droids4
+--> reverse the pass, patch the file, get the flag. Check out this file. 
+
+	This challenege is easy all we need to do to decomplie and understand the source code so that we can get the flag.
+
+	1. before decompling the APK open it into jadx-gui, here you get that there is class named 'FlagstaffHill'
+	2. All we can do is understand the output of this file so i rearranged the source code and complie in java and run
+
+	class FlagstaffHill {
+    
+
+    public static void main (String [] args) {
+        String str = "aaa";
+        StringBuilder ace = new StringBuilder(str);
+        StringBuilder jack = new StringBuilder(str);
+        StringBuilder queen = new StringBuilder(str);
+        StringBuilder king = new StringBuilder(str);
+        ace.setCharAt(0, (char) (ace.charAt(0) + 4));
+        ace.setCharAt(1, (char) (ace.charAt(1) + 19));
+        ace.setCharAt(2, (char) (ace.charAt(2) + 18));
+        jack.setCharAt(0, (char) (jack.charAt(0) + 7));
+        jack.setCharAt(1, (char) (jack.charAt(1) + 0));
+        jack.setCharAt(2, (char) (jack.charAt(2) + 1));
+        queen.setCharAt(0, (char) (queen.charAt(0) + 0));
+        queen.setCharAt(1, (char) (queen.charAt(1) + 11));
+        queen.setCharAt(2, (char) (queen.charAt(2) + 15));
+        king.setCharAt(0, (char) (king.charAt(0) + 14));
+        king.setCharAt(1, (char) (king.charAt(1) + 20));
+        king.setCharAt(2, (char) (king.charAt(2) + 15));
+        System.out.println("".concat(queen.toString()).concat(jack.toString()).concat(ace.toString()).concat(king.toString())); 
+    }
+}
+
+
+	3. Let's run and here we got that there is key 
+	-->  alphabetsoup
+
+	4.  now replace https://java2smali.com/
+
+
